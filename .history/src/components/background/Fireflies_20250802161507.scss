@@ -1,0 +1,52 @@
+$quantity: 15;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.firefly {
+  position: fixed;
+  font-size: 1.2rem;
+  font-family: monospace;
+  font-weight: bold;
+  color: #fcd34d;
+  text-shadow:
+    0 0 6px #fcd34d,
+    0 0 12px #fcd34d,
+    0 0 18px #fcd34d;
+
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+
+  animation: drift 60s ease-in-out infinite alternate;
+  opacity: 0.8;
+}
+
+// remove old glowing dot styles
+.firefly::before,
+.firefly::after {
+  content: none;
+}
+
+// generate randomized positions and movement speeds
+@for $i from 1 through $quantity {
+  .firefly:nth-child(#{$i}) {
+    left: #{random(100)}%;
+    top: #{random(100)}%;
+    animation-duration: #{random(40) + 30}s;
+    font-size: #{random(10) + 10}px;
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(10vw, -10vh) rotate(360deg);
+  }
+}

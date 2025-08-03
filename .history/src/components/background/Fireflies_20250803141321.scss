@@ -1,0 +1,38 @@
+
+#code-grid-background {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.code-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease;
+  animation: pulse 6s ease-in-out infinite;
+
+  &:hover {
+    opacity: 0.6;
+    box-shadow: 0 0 8px #fcd34d;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}

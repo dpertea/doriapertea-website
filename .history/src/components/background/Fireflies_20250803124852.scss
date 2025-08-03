@@ -1,0 +1,90 @@
+$quantity: 50;
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/*body {
+  background: url("https://i.pinimg.com/originals/44/6e/3b/446e3b79395a287ca32f7977dd83b290.jpg");
+  background-size: cover;
+}*/
+
+.firefly {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #fcd34d;
+  text-shadow: 0 0 10px #fcd34d;
+  animation: drift 30s ease-in-out infinite alternate;
+  pointer-events: none;
+  user-select: none;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform-origin: -10vw;
+  }
+
+  &::before {
+    background: #121212;
+    opacity: 0.4;
+    animation: drift ease alternate infinite;
+  }
+
+  &::after {
+    background: white;
+    opacity: 0;
+    box-shadow: 0 0 0vw 0vw #fcd34d;
+    animation: drift ease alternate infinite, flash ease infinite;
+    text-shadow:
+    0 0 6px #fcd34d,
+    0 0 12px #fcd34d,
+    0 0 20px #fcd34d;
+    content: attr(data-char);
+  }
+}
+
+// Generate variations per firefly instance
+@for $i from 1 through $quantity {
+
+  // pick a random start between 10%–90%
+  $startX: random(80) + 9;  
+  $startY: random(80) + 9;  
+
+  // pick a random drift between –10vw…+10vw and –10vh…+10vh
+  $driftX: (random(20) - 10) * 1vw;
+  $driftY: (random(20) - 10) * 1vh;
+
+  // assign position + animation name
+  .firefly:nth-child(#{$i}) {
+    left: #{$startX}%;
+    top:  #{$startY}%;
+    animation-name: drift-#{$i};
+  }
+
+  // generate the unique animation for this firefly
+  @keyframes drift-#{$i} {
+    from {
+      transform: translate(0,0) rotate(-50deg);
+    }
+    to {
+      transform: translate(#{$driftX}, #{$driftY}) rotate(50deg);
+    }
+  }
+}
+
+@keyframes flash {
+  0%, 30%, 100% {
+    opacity: 0;
+    box-shadow: 0 0 0vw 0vw #fcd34d;
+  }
+  5% {
+    opacity: 1;
+    box-shadow: 0 0 2vw 0.4vw #fcd34d;
+  }
+}

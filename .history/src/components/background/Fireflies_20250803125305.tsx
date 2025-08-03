@@ -1,0 +1,49 @@
+import React, { useEffect, useState } from "react";
+import "./fireflies.scss";
+
+const Fireflies: React.FC = () => {
+  const [visible, setVisible] = useState(false);
+  const quantity = 100;
+
+  const SKILLS = [
+    "JavaScript",
+    "TypeScript",
+    "NodeJS",
+    "React",
+    "Angular",
+    "NestJS",
+    "GraphQL",
+    "Express",
+    "MongoDB",
+    "SQL",
+    "PostgreSQL",
+    "Java",
+    "C#",
+    "Python",
+    "FastAPI",
+    "Flask",
+    "AWS",
+    "Docker",
+  ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, 2000); // 2 second delay
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div id="background-wrapper">
+      {Array.from({ length: quantity }, (_, i) => {
+        const bit = Math.random() < 0.5 ? "0" : "1";
+        return <div className="firefly" data-char={bit} key={i} />;
+      })}
+    </div>
+  );
+};
+
+export default Fireflies;

@@ -1,0 +1,86 @@
+$quantity: 15;
+
+html, body {
+  height: 100%;
+}
+
+/*body {
+  background: url("https://i.pinimg.com/originals/44/6e/3b/446e3b79395a287ca32f7977dd83b290.jpg");
+  background-size: cover;
+}*/
+
+.firefly {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 0.4vw;
+  height: 0.4vw;
+  margin: -0.2vw 0 0 9.8vw;
+  animation: drift 100s ease alternate infinite;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform-origin: -10vw;
+  }
+
+  &::before {
+    background: #121212;
+    opacity: 0.4;
+    animation: drift ease alternate infinite;
+  }
+
+  &::after {
+    background: white;
+    opacity: 0;
+    box-shadow: 0 0 0vw 0vw #fcd34d;
+    animation: drift ease alternate infinite, flash ease infinite;
+  }
+}
+
+// Generate variations per firefly instance
+@for $i from 1 through $quantity {
+  $rotationSpeed: random(10) + 8s;
+
+  .firefly:nth-child(#{$i}) {
+    left: calc(#{random(100)} * 1%);
+    top: calc(#{random(100)} * 1%);
+    animation-duration: #{random(60) + 20}s;
+    font-size: #{random(10) + 10}px; // slight font size variation
+
+    &::before {
+      animation-duration: $rotationSpeed;
+    }
+
+    &::after {
+      animation-duration: $rotationSpeed, #{random(6000) + 5000}ms;
+      animation-delay: 0ms, #{random(8000) + 500}ms;
+    }
+  }
+}
+
+
+@keyframes drift {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes flash {
+  0%, 30%, 100% {
+    opacity: 0;
+    box-shadow: 0 0 0vw 0vw #fcd34d;
+  }
+  5% {
+    opacity: 1;
+    box-shadow: 0 0 2vw 0.4vw #fcd34d;
+  }
+}
