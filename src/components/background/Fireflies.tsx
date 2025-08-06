@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import "./fireflies.scss";
 
 const Fireflies: React.FC = () => {
@@ -14,7 +14,6 @@ const Fireflies: React.FC = () => {
     "GraphQL",
     "Express",
     "MongoDB",
-    "SQL",
     "PostgreSQL",
     "Java",
     "C#",
@@ -25,16 +24,12 @@ const Fireflies: React.FC = () => {
     "Docker",
     "HTML",
     "CSS",
-    "SCSS",
     "Git",
-    "JIRA",
-    "Figma",
     "Graphql",
     "NextJS",
     "NestJS",
     "Jest",
     "Cypress",
-    "Vite",
     "Webpack",
     "CI/CD",
   ];
@@ -46,15 +41,6 @@ const Fireflies: React.FC = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const picks = useMemo(
-    () =>
-      Array.from({ length: SKILLS.length }, () => {
-        const idx = Math.floor(Math.random() * SKILLS.length);
-        return SKILLS[idx];
-      }),
-    []
-  );
 
   if (!visible) return null;
 
@@ -73,7 +59,7 @@ const Fireflies: React.FC = () => {
 
   return (
     <div id="background-wrapper">
-      {picks.map((skill: string, i: number) => (
+      {SKILLS.map((skill: string, i: number) => (
         <div className="firefly" data-char={skill} key={i} />
       ))}
     </div>

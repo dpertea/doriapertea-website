@@ -44,8 +44,12 @@ const getDesignTokens = (mode: PaletteMode) => {
       },
       h2: {
         fontWeight: 700,
-        fontFamily: "'Roboto Slab', serif",
+        fontFamily: "'Roboto', serif",
       },
+      h3: {
+        fontWeight: 700,
+        fontFamily: "'montserrat', sans-serif"
+      }
     },
     components: {
       MuiLink: {

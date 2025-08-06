@@ -76,9 +76,13 @@ export const Contact: React.FC = () => {
         flexDirection: "column",
         justifyContent: "center",
         px: 2,
+        py: 4,
       }}
     >
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
+      <Typography className="section-title" variant="h3" component="h2">
+        Contact
+      </Typography>
+      <Typography variant="h5" gutterBottom sx={{ py: 2 }}>
         I look forward to hearing from you.
       </Typography>
 

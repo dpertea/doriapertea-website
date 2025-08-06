@@ -1,11 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { Box, Container, Button, Pagination, Stack } from "@mui/material";
+import {
+  Box,
+  Container,
+  Button,
+  Pagination,
+  Stack,
+  Typography,
+} from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
 
-const Resume: React.FC = () => {
+export const Resume: React.FC = () => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [pageWidth, setPageWidth] = useState<number | undefined>(undefined);
@@ -38,6 +45,9 @@ const Resume: React.FC = () => {
 
   return (
     <Container maxWidth="md" sx={{ my: 0 }}>
+      <Typography className="section-title" variant="h3" component="h2">
+        Resume
+      </Typography>
       <Box
         ref={containerRef}
         display="flex"
@@ -46,7 +56,7 @@ const Resume: React.FC = () => {
         alignItems="center"
         sx={{
           mb: 3,
-          opacity: 0,
+          /*opacity: 0,
           animation: "slideDown 1s ease-out forwards",
           "@keyframes slideDown": {
             from: {
@@ -57,7 +67,7 @@ const Resume: React.FC = () => {
               transform: "translateY(0)",
               opacity: 1,
             },
-          },
+          },*/
         }}
       >
         <Button
@@ -103,5 +113,3 @@ const Resume: React.FC = () => {
     </Container>
   );
 };
-
-export default Resume;

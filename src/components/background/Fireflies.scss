@@ -11,14 +11,14 @@ $highlight-colors: (
 );
 
 #background-wrapper {
-  width: 100vw;
-  height: 100vh;
-  max-width: 100vw;
-  max-height: 100vh;
-  position: absolute;
-  overflow: hidden;
+  position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
@@ -69,11 +69,12 @@ $highlight-colors: (
 // Generate variations per firefly instance
 @for $i from 1 through $quantity {
   $rotationSpeed: random(10) + 8s;
+  //$color: nth($highlight-colors, ($i % length($highlight-colors)) + 1);
   $color: nth($highlight-colors, ($i % length($highlight-colors)) + 1);
 
   .firefly:nth-child(#{$i}) {
-    left: calc(#{random(100)} * 1%);
-    top: calc(#{random(100)} * 1%);
+    left: calc(#{random(90)} * 1%); // instead of 100%
+    top: calc(#{random(90)} * 1%);
     animation-duration: #{random(60) + 20}s;
     color: $color;
     text-shadow: 0 0 10px $color;
@@ -99,7 +100,7 @@ $highlight-colors: (
     transform: translate(0, 0) rotate(-5deg);
   }
   100% {
-    transform: translate(10vw, -10vh) rotate(5deg);
+    transform: translate(3vw, -3vh) rotate(5deg);
   }
 }
 

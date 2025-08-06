@@ -1,16 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Grid, Box } from "@mui/material";
 import { Intro } from "../components/Intro";
 import headshot from "../assets/headshot.jpg";
-import Resume from "./Resume";
 
 export const Home: React.FC = () => {
-  const [showResume, setShowResume] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowResume(true), 2000);
-    return () => clearTimeout(timer);
-  }, []);
   return (
     <>
       <Box
@@ -19,15 +12,19 @@ export const Home: React.FC = () => {
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
+          height: "100%",
+          width: "100%",
+          maxWidth: "100%",
+          boxSizing: "border-box",
         }}
       >
-        <Grid container justifyContent="center" spacing={2}>
+        <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid xs={12} md={10}>
             <Box
               sx={{
                 display: "flex",
                 flexDirection: { xs: "column", sm: "row" },
-                /*alignItems: "center",*/
+                alignItems: "center",
                 gap: 4,
               }}
             >

@@ -1,19 +1,95 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
+
+/** debug
+* { 
+  outline: 1px solid red;
+}
+*/ 
+#root {
+  height: 100%;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  width: 100vw;
+
+}
+
+section {
+  margin-bottom: 10px;
+}
+
+/*.section-title::before {
+  content: '';
+    width: 10rem;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    left: 0.1rem;
+    top: 3.3rem;
+    z-index: -1;
+    border-bottom: 18px solid #fcd34d;  
+}*/
+
+.section-title::after {
+  content: '';
+  display: inline-block;
+  width: 14px; 
+  height: 1em;
+  background-color: #fcd34d;
+  margin-left: 6px;
+  animation: blink 1s step-end infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.section-title {
+  display: inline-block;
+  overflow: hidden;              
+  white-space: nowrap;           
+  font-weight: 700;
+  font-style: italic;
+ 
+
+  animation: typing 2s steps(20, end);
+}
+
+/* typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 
 
 .card {
   padding: 2em;
 }
 
-.intro {
-
-  padding: 4rem;
-}
 
 .loader {
   color: #ffffff;

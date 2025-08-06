@@ -7,10 +7,9 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const buildValues = ["Workflows", "Experiences", "Automations", "Tools"];
 
-const AnimatedContainer = styled(Container)(({ theme }) => ({
+const AnimatedContainer = styled(Container)(() => ({
   animation: "slideInLeft 1.8s ease-out forwards",
   opacity: 0,
-  background: theme.palette.background.default,
   textAlign: "center", // default for mobile
 
   "@media (min-width:600px)": {
@@ -30,6 +29,13 @@ const AnimatedContainer = styled(Container)(({ theme }) => ({
 
 export const Intro: React.FC = () => {
   const theme = useTheme();
+
+  const scrollToProjects = () => {
+    const section = document.getElementById("projects");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <AnimatedContainer maxWidth="sm">
       <Typography variant="h2" component="h1" gutterBottom>
@@ -71,9 +77,11 @@ export const Intro: React.FC = () => {
           "&:hover": {
             backgroundColor: "accent.dark",
           },
+          background: "theme.palette.background.default",
           outline: "accent.main",
           color: "accent.main",
         }}
+        onClick={scrollToProjects}
       >
         See My Work
       </Button>

@@ -1,17 +1,25 @@
 import React from "react";
 import { AppBar, Box, Toolbar, IconButton, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link as RouterLink, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "Projects", path: "/projects" },
-  { label: "Resume", path: "/resume" },
-  { label: "Contact", path: "/contact" },
+  { label: "Projects", path: "projects" },
+  { label: "Resume", path: "resume" },
+  { label: "Contact", path: "contact" },
 ];
 
-export const Navbar: React.FC = () => {
-  const location = useLocation();
+export const Navbar: React.FC<{ show: boolean }> = ({
+  show,
+}: {
+  show: boolean;
+}) => {
+  if (!show) return null;
+
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <AppBar
@@ -43,8 +51,7 @@ export const Navbar: React.FC = () => {
             return (
               <Button
                 key={label}
-                component={RouterLink}
-                to={path}
+                onClick={() => scrollToSection("projects")}
                 sx={{
                   color: "inherit",
                   textDecoration: isActive ? "underline" : "none",
