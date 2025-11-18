@@ -9,12 +9,32 @@ const navLinks = [
 
 export const Navbar: React.FC<{ show: boolean }> = ({ show }) => {
   const [activeSection, setActiveSection] = useState<string>("");
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [isSmoothScrolling, setIsSmoothScrolling] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200; // Offset for navbar height
+    let scrollTimeout: ReturnType<typeof setTimeout>;
 
-      // Check if we're at the bottom of the page
+    const handleScroll = () => {
+      // don't update anything if we're in the middle of a smooth scroll from clicking
+      if (isSmoothScrolling) {
+        return;
+      }
+
+      // set scrolling state to true
+      setIsScrolling(true);
+
+      // clear existing timeout
+      clearTimeout(scrollTimeout);
+
+      // set timeout to detect when scrolling has stopped
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150); // 150ms after scrolling stops
+
+      const scrollPosition = window.scrollY + 200; // offset for navbar height
+
+      // check if we're at the bottom of the page
       const isAtBottom =
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 100;
@@ -24,7 +44,7 @@ export const Navbar: React.FC<{ show: boolean }> = ({ show }) => {
         return;
       }
 
-      // Find which section we're currently in
+      // find which section we're currently in
       let currentSection = "";
 
       for (const link of navLinks) {
@@ -46,14 +66,34 @@ export const Navbar: React.FC<{ show: boolean }> = ({ show }) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check on mount
+    handleScroll(); // check on mount
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, [isSmoothScrolling]);
 
   const scrollToSection = (id: string) => {
+    setActiveSection(id);
+    setIsSmoothScrolling(true);
     const section = document.getElementById(id);
-    section?.scrollIntoView({ behavior: "smooth" });
+    if (section) {
+      const navbarHeight = 64; // appBar default height
+      const offsetPosition = section.offsetTop - navbarHeight - 20; // extra 20px padding
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+
+    // reset smooth scrolling flag after animation completes
+    // use longer timeout to ensure scroll events have settled
+    setTimeout(() => {
+      setIsSmoothScrolling(false);
+      setIsScrolling(false); // ensure isScrolling is false when we exit smooth scroll
+    }, 1200);
   };
 
   return (
@@ -84,26 +124,37 @@ export const Navbar: React.FC<{ show: boolean }> = ({ show }) => {
                 fontSize: "1rem",
                 textTransform: "none",
                 position: "relative",
-                paddingBottom: "4px",
-                borderTop: "none",
-                borderLeft: "none",
-                borderRight: "none",
+                padding: "6px 16px",
+                border: "none",
                 borderBottom: isActive
                   ? "2px solid #fcd34d"
                   : "2px solid transparent",
                 borderRadius: 0,
                 backgroundColor: "transparent",
-                outline: "none",
+                outline: "none !important",
+                boxShadow: "none !important",
                 "&:hover": {
                   color: "accent.main",
                   backgroundColor: "transparent",
-                  borderBottom: "2px solid #fcd34d !important",
+                  borderBottom: "2px solid #fcd34d",
+                  outline: "none",
+                  boxShadow: "none",
+                },
+                "&:focus": {
+                  outline: "none !important",
+                  boxShadow: "none !important",
                 },
                 "&:focus-visible": {
-                  outline: "none",
-                  color: "accent.main",
-                  borderBottom: "2px solid #fcd34d",
-                  textShadow: "0 0 8px rgba(252, 211, 77, 0.5)",
+                  outline: "none !important",
+                  boxShadow: "none !important",
+                },
+                "&:active": {
+                  outline: "none !important",
+                  boxShadow: "none !important",
+                },
+                "&.Mui-focusVisible": {
+                  outline: "none !important",
+                  boxShadow: "none !important",
                 },
               }}
             >
