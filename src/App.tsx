@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CssBaseline, ThemeProvider, Box } from "@mui/material";
 import { ThemeContext } from "./context/ThemeContext";
 import { ThemeContextProvider } from "./context/ThemeContextProvider";
 import { darkTheme } from "./theme";
-//import { Navbar } from "./components/NavBar";
+import { Navbar } from "./components/NavBar";
 
 //background
 import Fireflies from "./components/background/Fireflies";
@@ -15,20 +15,20 @@ import { Projects } from "./views/Projects";
 
 const AppContent = () => {
   //const theme = React.useContext(ThemeContext);
-  //const [showNav, setShowNav] = useState(false);
+  const [showNav, setShowNav] = useState(false);
 
   useEffect(() => {
-    /*const handleScroll = () => {
+    const handleScroll = () => {
       setShowNav(window.scrollY > window.innerHeight * 0.8); // past the home section
     };
-    /*window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);*/
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      {/*<Navbar show={showNav} />*/}
+      <Navbar show={showNav} />
 
       <Box
         sx={{

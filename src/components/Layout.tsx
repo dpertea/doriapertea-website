@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { FooterIcons } from "./footer/FooterIcons";
 import { Navbar } from "./NavBar"; // optional, if you have one
@@ -6,6 +6,8 @@ import { Box } from "@mui/material";
 import Fireflies from "./background/Fireflies";
 
 export const Layout: React.FC = () => {
+  const [showNavbar, setShowNavbar] = useState(false);
+
   useEffect(() => {
     const cursor = document.getElementById("custom-cursor");
 
@@ -16,8 +18,18 @@ export const Layout: React.FC = () => {
       }
     };
 
+    const handleScroll = () => {
+      // Show navbar when scrolled past the viewport height (intro section)
+      setShowNavbar(window.scrollY > window.innerHeight * 0.8);
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
@@ -44,7 +56,7 @@ export const Layout: React.FC = () => {
           transition: "transform 0.05s linear",
         }}
       />*/}
-      <Navbar /> {/* optional */}
+      <Navbar show={showNavbar} />
       <Fireflies />
       <Box
         component="main"

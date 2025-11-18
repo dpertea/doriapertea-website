@@ -1,40 +1,44 @@
-import { createTheme, responsiveFontSizes, type Theme } from '@mui/material/styles'
-import { type PaletteMode } from '@mui/material'
+import {
+  createTheme,
+  responsiveFontSizes,
+  type Theme,
+} from "@mui/material/styles";
+import { type PaletteMode } from "@mui/material";
 //import { deepmerge } from '@mui/utils'
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Palette {
-    accent: Palette['primary']
+    accent: Palette["primary"];
   }
   interface PaletteOptions {
-    accent?: PaletteOptions['primary']
+    accent?: PaletteOptions["primary"];
   }
 }
 
 const getDesignTokens = (mode: PaletteMode) => {
-  const isDark = mode === 'dark'
+  const isDark = mode === "dark";
 
-  const accentMain = '#fcd34d'
+  const accentMain = "#fcd34d";
 
   return {
     palette: {
       mode,
       primary: {
-        main: isDark ? '#90caf9' : '#1976d2',
+        main: isDark ? "#90caf9" : "#1976d2",
       },
       secondary: {
-        main: isDark ? '#f48fb1' : '#9c27b0',
+        main: isDark ? "#f48fb1" : "#9c27b0",
       },
       accent: {
         main: accentMain,
-        contrastText: '#000',
+        contrastText: "#000",
       },
       background: {
-        default: isDark ? '#121212' : '#fafafa',
-        paper: isDark ? '#1e1e1e' : '#fff',
+        default: isDark ? "#121212" : "#fafafa",
+        paper: isDark ? "#1e1e1e" : "#fff",
       },
       text: {
-        primary: isDark ? '#fff' : '#000',
+        primary: isDark ? "#fff" : "#000",
       },
     },
     typography: {
@@ -48,7 +52,7 @@ const getDesignTokens = (mode: PaletteMode) => {
       },
       h3: {
         fontWeight: 700,
-        fontFamily: "'montserrat', sans-serif"
+        fontFamily: "'montserrat', sans-serif",
       },
       body1: {
         lineHeight: 1.7,
@@ -61,10 +65,10 @@ const getDesignTokens = (mode: PaletteMode) => {
       MuiLink: {
         styleOverrides: {
           root: {
-            color: 'inherit',
-            textDecoration: 'none',
-            transition: 'color 0.3s ease',
-            '&:hover': {
+            color: "inherit",
+            textDecoration: "none",
+            transition: "color 0.3s ease",
+            "&:hover": {
               color: accentMain,
             },
           },
@@ -73,27 +77,26 @@ const getDesignTokens = (mode: PaletteMode) => {
       MuiIconButton: {
         styleOverrides: {
           root: {
-            transition: 'color 0.3s ease',
-            '&:hover': {
+            transition: "color 0.3s ease",
+            "&:hover": {
               color: accentMain,
             },
             // for SVG icons inside the button
-            '& svg': {
-              transition: 'color 0.3s ease',
+            "& svg": {
+              transition: "color 0.3s ease",
             },
-            '&:hover svg': {
+            "&:hover svg": {
               color: accentMain,
             },
           },
         },
       },
-    }
-  }
-}
-
+    },
+  };
+};
 
 export const createAppTheme = (mode: PaletteMode): Theme =>
-  responsiveFontSizes(createTheme(getDesignTokens(mode)))
+  responsiveFontSizes(createTheme(getDesignTokens(mode)));
 
-export const lightTheme = createAppTheme('light')
-export const darkTheme = createAppTheme('dark')
+export const lightTheme = createAppTheme("light");
+export const darkTheme = createAppTheme("dark");
