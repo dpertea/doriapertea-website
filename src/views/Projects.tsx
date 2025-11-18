@@ -35,42 +35,75 @@ const projects: Project[] = [
   {
     title: "The Guardian Newsreader",
     description:
-      "A simple interface to interact with The Guardian's news API and easily search and access publications by date, edition, tag, and more. Built with React and Material UI, this was my first ever attempt at building a React App before discovering my passion for front-end focuse full stack development.",
+      "A simple interface to interact with The Guardian's news API and easily search and access publications by date, edition, tag, and more. Built with React and Material UI, this was my first ever attempt at building a React App before discovering my passion for full stack development.",
     still: projThreeStill,
     gif: projThreeGif,
   },
 ];
 
-// wrapper that handles hover targeting
-const ImageWrapper = styled(Box)(() => ({
+// wrapper that handles hovers
+const ImageWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   cursor: "pointer",
-  margin: "40px",
+  margin: theme.spacing(5), // margin: 40px if your spacing(1)=8px
 
+  // base: full width, centered
+  width: "100%",
+  marginLeft: "auto",
+  marginRight: "auto",
+
+  // from small screens up:
+  [theme.breakpoints.up("sm")]: {
+    width: 350,
+  },
+
+  // from medium screens up:
+  [theme.breakpoints.up("md")]: {
+    width: "45%",
+    marginLeft: 0,
+    marginRight: 0,
+  },
+
+  "& .project-image": {
+    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  },
   "& .project-image:hover": {
     transform: "scale(1.05)",
-    boxShadow: "1px 1px 10px 2px  #646cff",
+    boxShadow: "1px 1px 10px 2px #646cff",
   },
   "& .project-image:hover + .accent": {
-    // grow+rotate the accent sibling
     transform: "translate(0, 0) rotate(0deg) scale(1.15)",
-    // full size
     width: "100%",
     height: "100%",
   },
 }));
 
 export const Projects: React.FC = () => (
-  <Container maxWidth="lg" sx={{ py: 8 }}>
+  <Container maxWidth="lg" sx={{ py: 8, position: "relative", zIndex: 1 }}>
     <Typography
       variant="h3"
       align="center"
       gutterBottom
-      sx={{ fontWeight: 700, mb: 6 }}
+      sx={{ fontWeight: 700, mb: 2 }}
       className="section-title"
     >
       Projects
     </Typography>
+    <Box
+      sx={{
+        textAlign: "center",
+      }}
+    >
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{ fontStyle: "italic" }}
+      >
+        <span style={{ color: "#fcd34d" }}>*** </span>This site is actively
+        under construction. More refinements and project samples coming soon…
+        <span style={{ color: "#fcd34d" }}>*** </span>
+      </Typography>
+    </Box>
 
     {projects.map((proj, idx) => {
       const isReversed = idx % 2 === 1;
@@ -79,21 +112,23 @@ export const Projects: React.FC = () => (
         <Box
           key={proj.title}
           sx={{
-            mb: 12,
             display: "flex",
             flexDirection: {
               xs: "column",
               md: isReversed ? "row-reverse" : "row",
             },
             alignItems: "center",
-            gap: 12,
+            gap: { xs: 4, md: 12 },
+
+            // on xs, center content horizontally
+            justifyContent: { xs: "center", md: "space-between" },
           }}
         >
-          <ImageWrapper sx={{ width: { xs: "100%", md: "45%" } }}>
-            {/* project image */}
+          <ImageWrapper sx={{ width: { xs: "100%", sm: 350, md: "45%" } }}>
+            {/* project image/GIF */}
             <HoverSwapImage still={proj.still} gif={proj.gif} />
 
-            {/* geometric accent, initially a small diamond */}
+            {/* geometric accent */}
             <Box
               className="accent"
               sx={{
@@ -103,18 +138,24 @@ export const Projects: React.FC = () => (
                 width: 180,
                 height: 180,
                 backgroundColor: "#fcd34d",
-                // initial transform: offset by -40px in both directions, rotated 45°
                 transform: "translate(-40px, -40px) rotate(45deg) scale(1)",
                 transformOrigin: "center",
                 transition:
                   "transform 0.5s ease, width 0.5s ease, height 0.5s ease",
                 zIndex: 0,
-                pointerEvents: "none", //it was stealing the hover and causing a glithing effect
+                pointerEvents: "none", //it was stealing the hover and causing a glitching effect
               }}
             />
           </ImageWrapper>
 
-          <Box sx={{ width: { xs: "100%", md: "55%" } }}>
+          <Box
+            sx={{
+              width: { xs: "100%", md: "50%" },
+              backgroundColor: "#1e1e1e",
+              padding: 2,
+              borderRadius: 1,
+            }}
+          >
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>
               {proj.title}
             </Typography>
@@ -125,21 +166,6 @@ export const Projects: React.FC = () => (
         </Box>
       );
     })}
-    <Box
-      sx={{
-        mt: 8,
-        textAlign: "center",
-      }}
-    >
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        sx={{ fontStyle: "italic" }}
-      >
-        This site is under construction. More refinements and project samples
-        coming soon…
-      </Typography>
-    </Box>
   </Container>
 );
 
