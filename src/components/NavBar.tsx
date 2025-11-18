@@ -77,6 +77,8 @@ export const Navbar: React.FC<{ show: boolean }> = ({ show }) => {
               key={label}
               onClick={() => scrollToSection(id)}
               disableRipple
+              aria-label={`Navigate to ${label} section`}
+              aria-current={isActive ? "page" : undefined}
               sx={{
                 color: "text.primary",
                 fontSize: "1rem",
@@ -92,26 +94,16 @@ export const Navbar: React.FC<{ show: boolean }> = ({ show }) => {
                 borderRadius: 0,
                 backgroundColor: "transparent",
                 outline: "none",
-                boxShadow: "none",
                 "&:hover": {
                   color: "accent.main",
                   backgroundColor: "transparent",
                   borderBottom: "2px solid #fcd34d !important",
-                  boxShadow: "none",
-                },
-                "&:active": {
-                  backgroundColor: "transparent",
-                  outline: "none",
-                  boxShadow: "none",
-                },
-                "&:focus": {
-                  backgroundColor: "transparent",
-                  outline: "none",
-                  boxShadow: "none",
                 },
                 "&:focus-visible": {
                   outline: "none",
-                  boxShadow: "none",
+                  color: "accent.main",
+                  borderBottom: "2px solid #fcd34d",
+                  textShadow: "0 0 8px rgba(252, 211, 77, 0.5)",
                 },
               }}
             >

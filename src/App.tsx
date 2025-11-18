@@ -27,9 +27,33 @@ const AppContent = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
+      {/* Skip to main content link for keyboard users */}
+      <Box
+        component="a"
+        href="#main-content"
+        sx={{
+          position: "absolute",
+          left: "-9999px",
+          zIndex: 9999,
+          padding: "1rem",
+          backgroundColor: "accent.main",
+          color: "#000",
+          textDecoration: "none",
+          fontWeight: "bold",
+          "&:focus": {
+            left: "50%",
+            top: "1rem",
+            transform: "translateX(-50%)",
+          },
+        }}
+      >
+        Skip to main content
+      </Box>
       <Navbar show={showNav} />
 
       <Box
+        id="main-content"
+        component="main"
         sx={{
           overflowY: "auto",
 

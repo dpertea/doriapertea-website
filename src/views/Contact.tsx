@@ -126,6 +126,7 @@ export const Contact: React.FC = () => {
         component="form"
         onSubmit={handleSubmit}
         noValidate
+        aria-label="Contact form"
         sx={{
           animation: `${dropDown} 0.8s ease-out`,
           backgroundColor: "#1e1e1e",
