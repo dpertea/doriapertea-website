@@ -12,17 +12,31 @@ const TextDecryptEffect: React.FC<TextDecryptEffectProps> = ({
 }) => {
   const [result, dencrypt] = useDencrypt();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [isFirstTransition, setIsFirstTransition] = useState(true);
   const theme = useTheme();
 
   useEffect(() => {
+    // starting with slight delay before showing the first word
+    const initialTimeout = setTimeout(() => {
+      dencrypt(textValues[0]);
+    }, 1200);
+
+    return () => clearTimeout(initialTimeout);
+  }, [dencrypt, textValues]);
+
+  useEffect(() => {
+    // using longer delay for first transition, normal delay for subsequent ones
+    const delay = isFirstTransition ? 2500 : 1800;
+
     const action = setInterval(() => {
       const nextIndex = (currentWordIndex + 1) % textValues.length;
       setCurrentWordIndex(nextIndex);
       dencrypt(textValues[nextIndex]);
-    }, 1800);
+      if (isFirstTransition) setIsFirstTransition(false);
+    }, delay);
 
     return () => clearInterval(action);
-  }, [currentWordIndex, dencrypt, textValues]);
+  }, [currentWordIndex, dencrypt, textValues, isFirstTransition]);
 
   const isFinalWord = textValues.includes(result);
 
