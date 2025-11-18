@@ -11,7 +11,9 @@ import {
 import DownloadIcon from "@mui/icons-material/Download";
 import "../App.css";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `${import.meta.env.BASE_URL}pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `${
+  import.meta.env.BASE_URL
+}pdf.worker.min.js`;
 
 export const Resume: React.FC = () => {
   const [numPages, setNumPages] = useState<number | null>(null);
@@ -106,7 +108,9 @@ export const Resume: React.FC = () => {
           Download Resume
         </Button>
         <Document
-          file={`${window.location.origin}${import.meta.env.BASE_URL}DoriaPerteaResume.pdf`}
+          file={`${window.location.origin}${
+            import.meta.env.BASE_URL
+          }DoriaPerteaResume.pdf`}
           onLoadSuccess={handleDocumentLoadSuccess}
         >
           <Page
