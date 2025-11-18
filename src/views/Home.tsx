@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box } from "@mui/material";
+import { Grid2, Box } from "@mui/material";
 import { Intro } from "../components/Intro";
 import headshot from "../assets/headshot.jpg";
 
@@ -18,8 +18,8 @@ export const Home: React.FC = () => {
           boxSizing: "border-box",
         }}
       >
-        <Grid container justifyContent="center" alignItems="center" spacing={2}>
-          <Grid item xs={12} md={10}>
+        <Grid2 container justifyContent="center" alignItems="center" spacing={2}>
+          <Grid2 size={{ xs: 12, md: 10 }}>
             <Box
               sx={{
                 display: "flex",
@@ -77,8 +77,8 @@ export const Home: React.FC = () => {
 
               <Intro />
             </Box>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Box>
       {/*showResume && <Resume />*/}
     </>
