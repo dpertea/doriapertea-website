@@ -9,7 +9,7 @@ const navLinks = [
 
 export const Navbar: React.FC<{ show: boolean }> = ({ show }) => {
   const [activeSection, setActiveSection] = useState<string>("");
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [, setIsScrolling] = useState(false);
   const [isSmoothScrolling, setIsSmoothScrolling] = useState(false);
 
   useEffect(() => {
