@@ -30,6 +30,8 @@ const TextDecryptEffect: React.FC<TextDecryptEffectProps> = ({
     <Box
       component="span"
       sx={{
+        display: "inline-block",
+        minWidth: "200px",
         color: "inherit",
         textShadow: isFinalWord
           ? `0 0 4px ${theme.palette.accent.main}, 0 0 8px ${theme.palette.accent.main}`
@@ -38,7 +40,7 @@ const TextDecryptEffect: React.FC<TextDecryptEffectProps> = ({
       }}
     >
       {result}
-      {" "}
+      {" "}
     </Box>
   );
 };

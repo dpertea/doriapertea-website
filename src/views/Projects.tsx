@@ -42,7 +42,7 @@ const projects: Project[] = [
   {
     title: "The Guardian Newsreader",
     description:
-      "A simple interface to interact with The Guardian's news API and easily search and access publications by date, edition, tag, and more. Built with React and Material UI, this was my first ever attempt at building a React App before discovering my passion for full stack development.",
+      "A simple interface to interact with The Guardian's news API to easily search and access publications by date, edition, tag, and more. Built with React and Material UI, this was my first ever attempt at building a React App before landing my first job and discovering my passion for full stack development.",
     still: projThreeStill,
     gif: projThreeGif,
   },
@@ -86,7 +86,13 @@ export const Projects: React.FC = () => (
       variant="h3"
       align="center"
       gutterBottom
-      sx={{ fontWeight: 700, mb: 6 }}
+      sx={{
+        fontWeight: 700,
+        mb: 6,
+        backgroundColor: "#121212",
+        display: "inline-block",
+        px: 2,
+      }}
       className="section-title"
     >
       Projects
@@ -221,7 +227,11 @@ const ProjectRow: React.FC<{ project: Project; isReversed: boolean }> = ({
         <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
           {project.title}
         </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ lineHeight: 1.8 }}
+        >
           {project.description}
         </Typography>
       </Box>

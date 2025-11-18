@@ -37,16 +37,25 @@ export const Intro: React.FC = () => {
   };
   return (
     <AnimatedContainer maxWidth="sm">
-      <Typography variant="h2" component="h1" gutterBottom>
+      <Typography
+        variant="h2"
+        component="h1"
+        sx={{
+          backgroundColor: "#121212",
+          display: "inline-block",
+          px: 1,
+          mb: 2,
+        }}
+      >
         Hi, I'm{" "}
         <Box component="span" color="accent.main">
           Doria
         </Box>
       </Typography>
+      <br />
       <Typography
         variant="h5"
         component="h2"
-        gutterBottom
         sx={{
           opacity: 0,
           animation: "fadeIn 0.8s ease-out 0.8s forwards",
@@ -54,11 +63,15 @@ export const Intro: React.FC = () => {
             from: { opacity: 0 },
             to: { opacity: 1 },
           },
+          backgroundColor: "#121212",
+          display: "inline-block",
+          px: 1,
+          mb: 3,
         }}
       >
-        and I like to build
-        <br /> <TextDecryptEffect textValues={buildValues} />
+        and I like to build <TextDecryptEffect textValues={buildValues} />
       </Typography>
+      <br />
       {/*href="/DoriaPerteaResume.pdf"*/}
       <Button
         component="a"
@@ -76,6 +89,7 @@ export const Intro: React.FC = () => {
             from: { opacity: 0 },
             to: { opacity: 1 },
           },
+          backgroundColor: "#121212",
           borderColor: "accent.main",
           color: "accent.main",
           "&:hover": {

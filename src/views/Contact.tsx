@@ -87,11 +87,25 @@ export const Contact: React.FC = () => {
         className="section-title"
         variant="h3"
         component="h2"
-        sx={{ mb: 4 }}
+        sx={{
+          mb: 4,
+          backgroundColor: "#121212",
+          display: "inline-block",
+          px: 2,
+        }}
       >
         Contact
       </Typography>
-      <Typography variant="h5" gutterBottom sx={{ mb: 4 }}>
+      <Typography
+        variant="h5"
+        gutterBottom
+        sx={{
+          mb: 4,
+          backgroundColor: "#121212",
+          display: "inline-block",
+          px: 2,
+        }}
+      >
         I look forward to hearing from you.
       </Typography>
 

@@ -72,7 +72,12 @@ export const Resume: React.FC = () => {
           className="section-title"
           variant="h3"
           component="h2"
-          sx={{ mb: 4 }}
+          sx={{
+            mb: 4,
+            backgroundColor: "#121212",
+            display: "inline-block",
+            px: 2,
+          }}
         >
           Resume
         </Typography>
@@ -89,6 +94,7 @@ export const Resume: React.FC = () => {
             py: 1.5,
             fontSize: "1rem",
             fontWeight: 600,
+            backgroundColor: "#121212",
             borderColor: "accent.main",
             color: "accent.main",
             "&:hover": {
